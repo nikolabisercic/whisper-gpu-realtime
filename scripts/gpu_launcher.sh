@@ -22,4 +22,4 @@ echo "✓ Using ctranslate2 bundled CUDNN"
 echo ""
 
 # Run the speech-to-text
-exec python src/speech_to_text.py "$@"
+exec python ../src/speech_to_text.py "$@"

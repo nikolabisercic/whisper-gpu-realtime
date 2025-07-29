@@ -1,0 +1,55 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: speech-to-text-backend
+    ports:
+      - "6541:6541"
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    volumes:
+      # Mount model cache to avoid re-downloading
+      - whisper-models:/root/.cache/huggingface
+      # Mount source code for development (optional, remove in production)
+      - ./backend:/app/backend
+      - ./src:/app/src
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - speech-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6541/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: speech-to-text-frontend
+    ports:
+      - "6542:6542"
+    depends_on:
+      - backend
+    networks:
+      - speech-network
+    environment:
+      - NODE_ENV=production
+
+volumes:
+  whisper-models:
+    driver: local
+
+networks:
+  speech-network:
+    driver: bridge

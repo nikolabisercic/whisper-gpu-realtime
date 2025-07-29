@@ -19,4 +19,4 @@ export CUDA_MODULE_LOADING=LAZY
 export CT2_USE_EXPERIMENTAL_CUDNN_V8=1
 
 # Run the speech-to-text script
-exec python3 src/speech_to_text.py "$@"
+exec python3 ../src/speech_to_text.py "$@"

@@ -1,0 +1,28 @@
+version: '3.8'
+
+# Development override configuration
+# Use with: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      - DEVELOPMENT=true
+    volumes:
+      # Mount source code for hot reloading
+      - ./backend:/app/backend
+      - ./src:/app/src
+      - ./scripts:/app/scripts
+    command: ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "6541", "--reload"]
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
