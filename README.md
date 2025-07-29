@@ -6,8 +6,8 @@ Real-time speech-to-text using OpenAI Whisper with **NVIDIA GPU acceleration**. 
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/text2speach.git
-cd text2speach
+git clone https://github.com/nikolabisercic/whisper-gpu-realtime.git
+cd whisper-gpu-realtime
 
 # 2. Copy environment template
 cp .env.example .env
@@ -297,8 +297,8 @@ docker compose exec frontend npm test
 1. **Fork & Clone**:
 
    ```bash
-   git clone https://github.com/yourusername/text2speach.git
-   cd text2speach
+   git clone https://github.com/nikolabisercic/whisper-gpu-realtime.git
+   cd whisper-gpu-realtime
    cp .env.example .env
    ```
 

@@ -13,8 +13,8 @@ Get real-time speech-to-text running in under 5 minutes!
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/text2speach.git
-cd text2speach
+git clone https://github.com/nikolabisercic/whisper-gpu-realtime.git
+cd whisper-gpu-realtime
 
 # Copy environment template
 cp .env.example .env
